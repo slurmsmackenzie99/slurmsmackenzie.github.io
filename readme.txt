@@ -1,0 +1,1 @@
+This game was developed as a part of the coursework for Web Technologies module. It's a text-based adventure game called "Pawel's Room" where you can examine different scenarios to guess the country you are in.

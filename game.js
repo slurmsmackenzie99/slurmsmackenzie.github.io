@@ -42,117 +42,115 @@ function selectOption(option) {
 const textNodes = [
   {
     id: 1,
-    text: 'You wake up in a strange place and you see a jar of blue goo near you.',
+    text: 'You are in the corridor with three doors in front of you.',
     options: [
       {
-        text: 'Take the goo',
-        setState: { blueGoo: true },
-        nextText: 2
+        text: 'Enter Room 1',
+        nextText: 20
       },
       {
-        text: 'Leave the goo',
-        nextText: 2
+        text: 'Enter Room 2',
+        nextText: 30
+      },
+      {
+      	text: 'Enter Room 3',
+      	nextText: 40
       }
     ]
   },
+
+
+
   {
-    id: 2,
-    text: 'You venture forth in search of answers to where you are when you come across a merchant.',
+    id: 20,
+    text: 'You enter Room 1. You see a window and a table',
     options: [
       {
-        text: 'Trade the goo for a sword',
-        requiredState: (currentState) => currentState.blueGoo,
-        setState: { blueGoo: false, sword: true },
-        nextText: 3
+        text: 'Look out the window',
+        nextText: 22
       },
       {
-        text: 'Trade the goo for a shield',
-        requiredState: (currentState) => currentState.blueGoo,
-        setState: { blueGoo: false, shield: true },
-        nextText: 3
+        text: 'Check the table',
+        nextText: 21
       },
       {
-        text: 'Ignore the merchant',
-        nextText: 3
-      }
-    ]
-  },
-  {
-    id: 3,
-    text: 'After leaving the merchant you start to feel tired and stumble upon a small town next to a dangerous looking castle.',
-    options: [
-      {
-        text: 'Explore the castle',
-        nextText: 4
+        text: 'Go back to the corridor',
+        nextText: 1
       },
       {
-        text: 'Find a room to sleep at in the town',
-        nextText: 5
-      },
-      {
-        text: 'Find some hay in a stable to sleep in',
-        nextText: 6
-      }
-    ]
-  },
-  {
-    id: 4,
-    text: 'You are so tired that you fall asleep while exploring the castle and are killed by some terrible monster in your sleep.',
-    options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
-    ]
-  },
-  {
-    id: 5,
-    text: 'Without any money to buy a room you break into the nearest inn and fall asleep. After a few hours of sleep the owner of the inn finds you and has the town guard lock you in a cell.',
-    options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
-    ]
-  },
-  {
-    id: 6,
-    text: 'You wake up well rested and full of energy ready to explore the nearby castle.',
-    options: [
-      {
-        text: 'Explore the castle',
+        text: 'Guess the country',
         nextText: 7
       }
     ]
   },
   {
+    id: 22,
+    text: 'You see a huge steel tower. Its night-time so you see bright lights all over it. You also see a warning that taking a picture of it will get you arrested.',
+    options: [
+      {
+        text: 'Take a picture of it. ',
+        nextText: 23
+      },
+      {
+        text: 'Note it in your mind and continue looking at Room 1',
+        nextText: 20
+      },
+      {
+      	text: 'Go back to the corridor',
+      	nextText: 1
+      },
+      {
+      	text: 'Guess the country',
+      	nextText: 7
+      }
+    ]
+  },
+  {
+    id: 23,
+    text: 'You just took a picture of Eiffel Tower at night. Its illegal so the police put you in jail, you starve to death and die.',
+    options: [
+      {
+        text: 'Restart',
+        nextText: -1
+      },
+    ]
+  },
+  {
+    id: 21,
+    text: 'You see a dictionary on the table.',
+    options: [
+      {
+        text: 'Pick up the dictionary.',
+        setState: { dictionary: true },
+        nextText: 20
+      },
+      {
+        text: 'Leave the dictionary.',
+        nextText: 20
+      }
+    ]
+  },
+  {
     id: 7,
-    text: 'While exploring the castle you come across a horrible monster in your path.',
+    text: 'You decided to guess the country.',
     options: [
       {
-        text: 'Try to run',
-        nextText: 8
+        text: 'Poland',
+        nextText: 51
       },
       {
-        text: 'Attack it with your sword',
-        requiredState: (currentState) => currentState.sword,
-        nextText: 9
+        text: 'England',
+        nextText: 51
       },
       {
-        text: 'Hide behind your shield',
-        requiredState: (currentState) => currentState.shield,
-        nextText: 10
+        text: 'France',
+        nextText: 52
       },
-      {
-        text: 'Throw the blue goo at it',
-        requiredState: (currentState) => currentState.blueGoo,
-        nextText: 11
-      }
     ]
   },
   {
-    id: 8,
-    text: 'Your attempts to run are in vain and the monster easily catches.',
+    id: 51,
+    text: 'Your guess is incorrect.',
     options: [
       {
         text: 'Restart',
@@ -161,8 +159,73 @@ const textNodes = [
     ]
   },
   {
-    id: 9,
-    text: 'You foolishly thought this monster could be slain with a single sword.',
+    id: 52,
+    text: 'Correct! Congratulations on winning the game.',
+    options: [
+      {
+        text: 'Play again',
+        nextText: -1
+      }
+    ]
+  },  
+  {
+    id: 30,
+    text: 'Upon opening the door you encounter a strange man with a nametag Benjamin who appears to be waiting for you.',
+    options: [
+      {
+        text: 'Talk to Benjamin',
+        nextText: 31
+      },
+      {
+        text: 'Go back to the corridor',
+        nextText: 1
+      },
+      {
+        text: 'Guess the country',
+        nextText: 7
+      }
+    ]
+  },
+  {
+    id: 31,
+    text: 'Benjamin is talking in a language you do not understand',
+    options: [
+      {
+        text: 'Look up the conversation words in dictionary to understand what Benjamin is talking about',
+        requiredState: (currentState) => currentState.dictionary,
+        nextText: 32
+      },
+      {
+        text: 'Try to talk to Benjamin without any help resource',
+        nextText: 33
+      },
+      {
+        text: 'Go back to the corridor',
+        nextText: 1
+      },
+      {
+        text: 'Guess the country',
+        nextText: 7
+      }
+    ]
+  },
+  {
+    id: 32,
+    text: 'With the help of a dictionary you decipher that Benjamin is saying "Alexandre Dumas and his book "The Count of Monte Cristo" is the greatest literary achievement of our national literary canon.',
+    options: [
+      {
+        text: 'Thank Benjamin for the conversation and go back to the corridor',
+        nextText: 1
+      },
+      {
+        text: 'Guess the country',
+        nextText: 7
+      }
+    ]
+  },
+  {
+    id: 33,
+    text: 'You dont understand what Benjamin is talking about. He gets upset at you and kills you.',
     options: [
       {
         text: 'Restart',
@@ -171,25 +234,33 @@ const textNodes = [
     ]
   },
   {
-    id: 10,
-    text: 'The monster laughed as you hid behind your shield and ate you.',
+    id: 40,
+    text: 'In Room 3 there is no windows, but on the wall there is a painting. The warning on top of it says to not get close to it or you will get killed.',
     options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
+    	{
+    		text: 'Examine the painting anyway.',
+    		nextText: 41
+    	},
+    	{
+    		text: 'Ignore the paiting and come back to the corridor.',
+    		nextText: 1
+    	}
     ]
   },
   {
-    id: 11,
-    text: 'You threw your jar of goo at the monster and it exploded. After the dust settled you saw the monster was destroyed. Seeing your victory you decide to claim this castle as your and live out the rest of your days there.',
+    id: 41,
+    text: 'On the paiting there is a cabaret and a red mill above it. A text on top of it says Moulin Rouge.',
     options: [
       {
-        text: 'Congratulations. Play Again.',
-        nextText: -1
+        text: 'Go back to the corridor',
+        nextText: 1
+      },
+      {
+        text: 'Guess the country',
+        nextText: 7
       }
     ]
-  }
+  },
 ]
 
 startGame()
